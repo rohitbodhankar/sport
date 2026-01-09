@@ -1,0 +1,7 @@
+{
+  "name": "Copy of OTC Sports Club - Elite Hub",
+  "description": "The official digital platform for OTC Sports Club. Live cricket updates, tournament tracking, and AI-powered sports strategy. Built by Rohit.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
