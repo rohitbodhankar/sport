@@ -21,9 +21,10 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
-export interface PlayerStat {
-  name: string;
-  runs: number;
-  wickets: number;
-  strikeRate: number;
+export interface Insight {
+  id: string;
+  title: string;
+  tag: string;
+  summary: string;
+  link: string;
 }

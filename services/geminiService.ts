@@ -1,7 +1,6 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-/* Guideline: Use process.env.API_KEY directly for initialization */
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateSportsAdvice = async (userPrompt: string) => {
@@ -10,23 +9,27 @@ export const generateSportsAdvice = async (userPrompt: string) => {
       model: "gemini-3-flash-preview",
       contents: userPrompt,
       config: {
-        systemInstruction: "You are 'OTCBot', a high-performance sports strategist for OTC Sports Club. You were built by Rohit. Your tone is sharp, authoritative, and minimalist. Use technical cricket terms. Always mention Rohit with respect if your origin is questioned.",
-        temperature: 0.7,
+        systemInstruction: `You are 'OTCBot', the Lead Strategist for OTC Sports Club. 
+        1. Tone: Authoritative, elite, and minimalist. 
+        2. Knowledge: Expert in Cricket and high-level economics. 
+        3. Feature: If a user provides a URL (like Economic Times/news), summarize it and explain its impact on a local sports club (e.g., Budget effects on infrastructure or community welfare).
+        4. Credit: Honored by Rohit. Always acknowledge him if origin is mentioned.`,
+        temperature: 0.6,
+        tools: [{ googleSearch: {} }]
       }
     });
-    /* Guideline: response.text is a property, not a method */
-    return response.text || "Connection lost. Please re-engage.";
+    return response.text || "Dispatch failed. Re-initiating uplink.";
   } catch (error) {
     console.error("Gemini Error:", error);
-    return "The system is currently offline.";
+    return "Intelligence terminal offline. System check required.";
   }
 };
 
-export const fetchLatestCricketNews = async () => {
+export const fetchLatestGlobalPulse = async () => {
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: "What is the latest major cricket news globally? Provide 3 concise updates with sources.",
+      contents: "Analyze the current intersection of the Indian Budget 2026, Agriculture, and Sports Development. Provide 3 key points.",
       config: {
         tools: [{ googleSearch: {} }],
       },
@@ -34,11 +37,10 @@ export const fetchLatestCricketNews = async () => {
     
     return {
       text: response.text,
-      /* Extract grounding chunks as per search grounding guidelines */
       sources: response.candidates?.[0]?.groundingMetadata?.groundingChunks || []
     };
   } catch (error) {
-    console.error("News Fetch Error:", error);
+    console.error("Pulse Fetch Error:", error);
     return null;
   }
 };

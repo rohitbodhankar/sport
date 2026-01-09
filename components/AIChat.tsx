@@ -9,7 +9,7 @@ interface AIChatProps {
 
 const AIChat: React.FC<AIChatProps> = ({ mini }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "Welcome to the Strategic Consultation. I am OTCBot, crafted by Rohit. How shall we optimize your gameplay today?", timestamp: new Date() }
+    { role: 'model', text: "Strategic uplink established. I am OTCBot. Share a query or a news URL for impact analysis.", timestamp: new Date() }
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -31,24 +31,25 @@ const AIChat: React.FC<AIChatProps> = ({ mini }) => {
   };
 
   return (
-    <div className={`legacy-card overflow-hidden flex flex-col ${mini ? 'h-[450px]' : 'h-[600px]'}`}>
-      <div className="p-6 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+    <div className={`border-4 border-black overflow-hidden flex flex-col bg-white ${mini ? 'h-[480px]' : 'h-[650px]'}`}>
+      <div className="p-5 border-b-2 border-black flex items-center justify-between bg-black text-white">
         <div className="flex flex-col">
-          <span className="text-[10px] font-black text-[#064e3b] uppercase tracking-[0.2em]">Strategy Terminal</span>
-          <span className="text-xs font-bold text-gray-400 italic">OTCBot v2.4 (Encrypted)</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.2em]">Lead Strategist</span>
+          <span className="text-[9px] font-bold text-gray-400 italic">OTCBot Intelligence Unit</span>
         </div>
+        <div className="w-3 h-3 bg-[#e11d48] animate-pulse"></div>
       </div>
 
-      <div ref={scrollRef} className="flex-grow p-8 overflow-y-auto space-y-6 scrollbar-hide">
+      <div ref={scrollRef} className="flex-grow p-6 overflow-y-auto space-y-6 scrollbar-hide bg-gray-50/30">
         {messages.map((msg, idx) => (
           <div key={idx} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-            <span className="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-1">
-              {msg.role === 'user' ? 'Member Request' : 'Consultant Dispatch'}
+            <span className="text-[8px] font-black uppercase tracking-widest text-gray-400 mb-1">
+              {msg.role === 'user' ? 'Member Data' : 'Executive Output'}
             </span>
-            <div className={`max-w-[90%] p-4 text-sm leading-relaxed ${
+            <div className={`max-w-[95%] p-4 text-[13px] leading-relaxed border-2 border-black ${
               msg.role === 'user' 
-              ? 'bg-[#111827] text-white italic border-r-4 border-[#064e3b]' 
-              : 'bg-gray-50 text-[#111827] border-l-4 border-[#064e3b]'
+              ? 'bg-white text-black italic' 
+              : 'bg-black text-white'
             }`}>
               {msg.text}
             </div>
@@ -56,30 +57,40 @@ const AIChat: React.FC<AIChatProps> = ({ mini }) => {
         ))}
         {isTyping && (
           <div className="flex flex-col items-start">
-            <span className="text-[9px] font-black uppercase tracking-widest text-[#064e3b] mb-1 animate-pulse">Analyzing Field Data...</span>
+             <div className="w-full h-1 bg-gray-200 relative overflow-hidden mb-2">
+                <div className="absolute top-0 h-full bg-[#e11d48] w-1/3 animate-[slide_1.5s_infinite_linear]"></div>
+             </div>
+            <span className="text-[8px] font-black uppercase tracking-widest text-[#e11d48] animate-pulse">Parsing Intelligence...</span>
           </div>
         )}
       </div>
 
-      <div className="p-6 bg-white border-t border-gray-100">
+      <div className="p-6 bg-white border-t-4 border-black">
         <div className="flex gap-4">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Input strategic inquiry..."
-            className="flex-grow border-b-2 border-gray-200 py-2 text-sm focus:outline-none focus:border-[#064e3b] transition-colors bg-transparent italic"
+            placeholder="Paste URL or strategy query..."
+            className="flex-grow border-b-2 border-gray-200 py-2 text-[13px] font-medium focus:outline-none focus:border-black transition-colors bg-transparent italic"
           />
           <button 
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
-            className="text-[11px] font-black text-[#064e3b] uppercase tracking-widest hover:underline disabled:opacity-30"
+            className="text-[10px] font-black text-black uppercase tracking-[0.2em] hover:text-[#e11d48] disabled:opacity-30"
           >
-            Dispatch
+            Deploy
           </button>
         </div>
       </div>
+      
+      <style>{`
+        @keyframes slide {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(300%); }
+        }
+      `}</style>
     </div>
   );
 };
