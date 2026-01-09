@@ -2,45 +2,44 @@
 import React from 'react';
 
 interface NavbarProps {
-  activeTab: 'home' | 'tournaments' | 'stats' | 'chat';
+  activeTab: 'home' | 'tournaments' | 'stats' | 'chat' | 'news';
   setActiveTab: (tab: any) => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const tabs = [
-    { id: 'home', label: 'Overview' },
-    { id: 'tournaments', label: 'Tours' },
-    { id: 'stats', label: 'Analytics' },
+    { id: 'home', label: 'Index' },
+    { id: 'tournaments', label: 'Tournaments' },
+    { id: 'stats', label: 'Data' },
+    { id: 'news', label: 'Pulse' },
     { id: 'chat', label: 'Consult' },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 px-8 py-3 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b-2 border-black px-6 md:px-12 py-5 flex items-center justify-between">
       <div 
-        className="flex items-center gap-3 cursor-pointer" 
+        className="flex items-center gap-4 cursor-pointer" 
         onClick={() => setActiveTab('home')}
       >
-        <div className="flex flex-col">
-          <h1 className="text-xl font-black italic tracking-tighter leading-none text-[#064e3b]">OTC</h1>
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Sports Club</span>
-        </div>
+        <span className="text-2xl font-black tracking-tighter uppercase italic leading-none">
+          OTC<span className="text-[#e11d48]">.</span>
+        </span>
+        <div className="h-6 w-px bg-black hidden md:block"></div>
+        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-black hidden md:block">Elite Sports Club</span>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex gap-6 md:gap-10">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-1 py-2 text-[11px] font-bold uppercase tracking-widest transition-all relative ${
+            className={`text-[11px] font-black uppercase tracking-widest transition-all ${
               activeTab === tab.id 
-              ? 'text-[#064e3b]' 
-              : 'text-gray-400 hover:text-[#064e3b]'
+              ? 'text-[#e11d48]' 
+              : 'text-gray-400 hover:text-black'
             }`}
           >
             {tab.label}
-            {activeTab === tab.id && (
-              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#064e3b]"></div>
-            )}
           </button>
         ))}
       </div>

@@ -4,48 +4,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OTC Sports Club | Legacy of Excellence</title>
+    <title>OTC Sports Club | The New Standard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-      :root {
-        --bg-paper: #fdfbf7;
-        --emerald-legacy: #064e3b;
-        --crimson-accent: #991b1b;
-        --charcoal: #111827;
-      }
       body {
         font-family: 'Inter', sans-serif;
-        background-color: var(--bg-paper);
-        color: var(--charcoal);
+        background-color: #ffffff;
+        color: #000000;
+        overflow-x: hidden;
       }
-      h1, h2, h3, .serif {
-        font-family: 'Playfair Display', serif;
+      .font-black-italic {
+        font-weight: 900;
+        font-style: italic;
       }
-      .legacy-card {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        box-shadow: 4px 4px 0px rgba(6, 78, 59, 0.1);
-        transition: transform 0.2s ease;
+      .grid-pattern {
+        background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+        background-size: 20px 20px;
       }
-      .legacy-card:hover {
-        transform: translate(-2px, -2px);
-        box-shadow: 6px 6px 0px rgba(6, 78, 59, 0.15);
+      .mag-border {
+        border: 2px solid #000;
       }
-      .btn-legacy {
-        background-color: var(--emerald-legacy);
-        color: #fff;
-        font-weight: 700;
-        padding: 12px 24px;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        transition: all 0.2s;
+      .accent-red {
+        color: #e11d48;
       }
-      .btn-legacy:hover {
-        background-color: #043629;
+      .bg-accent-red {
+        background-color: #e11d48;
       }
-      .border-accent {
-        border-left: 4px solid var(--emerald-legacy);
+      .hover-lift {
+        transition: transform 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+      }
+      .hover-lift:hover {
+        transform: translateY(-4px);
       }
     </style>
     <script type="importmap">

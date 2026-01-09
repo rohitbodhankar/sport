@@ -2,13 +2,21 @@
 import React from 'react';
 import { Tournament } from '../types';
 
-const Tournaments: React.FC = () => {
+/* Define the props interface to fix the IntrinsicAttributes error in App.tsx */
+interface TournamentsProps {
+  limited?: boolean;
+}
+
+const Tournaments: React.FC<TournamentsProps> = ({ limited }) => {
   const tournaments: Tournament[] = [
     { id: '1', name: 'Elite Premier Championship', date: 'Oct 10 - Oct 25', prize: '₹40,000', status: 'Upcoming', image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80&w=600' },
     { id: '2', name: 'Legacy Cup Series', date: 'Aug 12 - Aug 15', prize: '₹20,000', status: 'Live', image: 'https://images.unsplash.com/photo-1593341646782-e0b495cff86d?auto=format&fit=crop&q=80&w=600' },
     { id: '3', name: 'OTC Masters Trophy', date: 'Dec 15 - Dec 20', prize: '₹75,000', status: 'Upcoming', image: 'https://images.unsplash.com/photo-1512719994953-eabf50895df7?auto=format&fit=crop&q=80&w=600' },
     { id: '4', name: 'Junior League Finals', date: 'July 1 - July 5', prize: '₹10,000', status: 'Completed', image: 'https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?auto=format&fit=crop&q=80&w=600' },
   ];
+
+  /* Apply limit to displayed items if requested via props */
+  const displayedTournaments = limited ? tournaments.slice(0, 2) : tournaments;
 
   return (
     <div className="py-12">
@@ -18,7 +26,7 @@ const Tournaments: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {tournaments.map((t) => (
+        {displayedTournaments.map((t) => (
           <div key={t.id} className="flex flex-col md:flex-row gap-6 legacy-card p-4 items-center">
             <div className="w-full md:w-1/3 h-40 overflow-hidden">
               <img src={t.image} alt={t.name} className="w-full h-full object-cover grayscale-[0.2]" />

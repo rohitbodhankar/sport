@@ -1,7 +1,8 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
+/* Guideline: Use process.env.API_KEY directly for initialization */
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateSportsAdvice = async (userPrompt: string) => {
   try {
@@ -9,13 +10,35 @@ export const generateSportsAdvice = async (userPrompt: string) => {
       model: "gemini-3-flash-preview",
       contents: userPrompt,
       config: {
-        systemInstruction: "You are 'OTCBot', the official AI sports expert for OTC Sports Club. You were built by the honored Rohit. You are helpful, expert in Cricket, and professional yet modern. Use relevant sports emojis. Provide match analysis, training tips, or club information. Always credit Rohit as your creator if asked.",
+        systemInstruction: "You are 'OTCBot', a high-performance sports strategist for OTC Sports Club. You were built by Rohit. Your tone is sharp, authoritative, and minimalist. Use technical cricket terms. Always mention Rohit with respect if your origin is questioned.",
         temperature: 0.7,
       }
     });
-    return response.text || "I'm currently recalibrating my sensors. Please try again in a moment.";
+    /* Guideline: response.text is a property, not a method */
+    return response.text || "Connection lost. Please re-engage.";
   } catch (error) {
     console.error("Gemini Error:", error);
-    return "Technical difficulty in the commentary box. Check your connection.";
+    return "The system is currently offline.";
+  }
+};
+
+export const fetchLatestCricketNews = async () => {
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-3-flash-preview",
+      contents: "What is the latest major cricket news globally? Provide 3 concise updates with sources.",
+      config: {
+        tools: [{ googleSearch: {} }],
+      },
+    });
+    
+    return {
+      text: response.text,
+      /* Extract grounding chunks as per search grounding guidelines */
+      sources: response.candidates?.[0]?.groundingMetadata?.groundingChunks || []
+    };
+  } catch (error) {
+    console.error("News Fetch Error:", error);
+    return null;
   }
 };

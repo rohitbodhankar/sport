@@ -3,32 +3,30 @@ import React from 'react';
 
 const Hero: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
   return (
-    <div className="py-12 md:py-20 border-b border-gray-200 mb-12 flex flex-col items-center text-center">
-      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#064e3b] mb-4">
-        EST. 2024 • THE LEGACY CONTINUES • BUILT BY ROHIT
-      </span>
-      <h1 className="text-6xl md:text-8xl font-black italic leading-[0.85] text-[#111827] mb-8 max-w-4xl tracking-tighter">
-        A TRADITION OF <br/>
-        <span className="text-[#064e3b]">EXCELLENCE.</span>
-      </h1>
-      <p className="text-gray-500 font-medium max-w-xl text-lg mb-10 leading-relaxed">
-        The OTC Sports Club isn't just a place to play. It's where champions are forged through data, discipline, and digital strategy.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-6">
-        <button onClick={onExplore} className="btn-legacy">
-          Explore Tournaments
-        </button>
-        <button className="px-8 py-3 border-2 border-[#064e3b] text-[#064e3b] font-bold uppercase tracking-widest text-sm hover:bg-[#064e3b] hover:text-white transition-all">
-          Contact Us
-        </button>
-      </div>
-      
-      <div className="mt-16 w-full max-w-5xl">
-        <img 
-          src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=1200" 
-          alt="Sports Stadium" 
-          className="w-full h-[400px] object-cover grayscale-[0.3] rounded-sm shadow-2xl"
-        />
+    <div className="relative group">
+      <div className="flex flex-col md:flex-row gap-8 items-start">
+        <div className="flex-1 order-2 md:order-1">
+          <div className="flex items-center gap-2 mb-6">
+            <span className="bg-black text-white text-[10px] font-black px-2 py-1 uppercase">Volume 24.0</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">By Rohit</span>
+          </div>
+          <h1 className="text-7xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.8] mb-8">
+            Victory <br/> <span className="text-[#e11d48]">Defined.</span>
+          </h1>
+          <p className="text-lg font-medium text-gray-700 max-w-md leading-tight mb-8">
+            OTC Sports Club represents the pinnacle of athletic discipline. We don't just participate; we dominate through elite data and grit.
+          </p>
+          <button onClick={onExplore} className="bg-black text-white px-10 py-4 font-black uppercase text-xs tracking-widest hover:bg-[#e11d48] transition-colors">
+            Official Schedule
+          </button>
+        </div>
+        <div className="w-full md:w-1/3 order-1 md:order-2 border-4 border-black p-2">
+           <img 
+            src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80&w=600" 
+            alt="Hero Sports" 
+            className="w-full grayscale hover:grayscale-0 transition-all duration-700"
+          />
+        </div>
       </div>
     </div>
   );
